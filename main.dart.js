@@ -34612,7 +34612,7 @@ A.rp.prototype={
 C(a,b){var s,r=null,q=A.as(b).S.z,p=q==null?r:q.vi(A.av(b,30,44,34,r),B.eK,1.2)
 q=this.c
 s=this.d
-return A.b_(A.b([A.bX(B.i,q,B.t,1,2,"I'm an experienced",r,p,s,1),new A.jd(r),A.bX(B.i,q,B.t,1,2,"SOFTWARE ENGINEER",r,p,s,1),new A.jd(r),A.bX(B.i,q,B.t,1,2,"who constantly seeks out innovative",r,p,s,1),new A.jd(r),A.bX(B.i,q,B.t,1,2,"solutions to everyday problems",r,p,s,1)],t.p),B.z,B.o,B.p)}}
+return A.b_(A.b([A.bX(B.i,q,B.t,1,2,"I'm an experienced",r,p,s,1),new A.jd(r),A.bX(B.i,q,B.t,1,2,"SOFTWARE ENGINEER",r,p,s,1),new A.jd(r),A.bX(B.i,q,B.t,1,2,"#Innovative #Curious",r,p,s,1),new A.jd(r),A.bX(B.i,q,B.t,1,2,"#Creative",r,p,s,1)],t.p),B.z,B.o,B.p)}}
 A.H2.prototype={
 C(a,b){var s=null,r=A.as(b).S.x
 return A.X(s,A.hU(new A.a0E(this,r==null?s:r.cd(B.i,16))),B.j,s,s,s,s,s,s,s,s,s,s,this.d)},
