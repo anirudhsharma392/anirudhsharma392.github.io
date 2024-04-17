@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- background-color: transparent; -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        overflow: hidden;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+      }
+
+      iframe,
+      .player {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <!-- Paste this right before your closing </head> tag -->
+    <script type="text/javascript">
+      (function (f, b) {
+        if (!b.__SV) {
+          var e, g, i, h;
+          window.mixpanel = b;
+          b._i = [];
+          b.init = function (e, f, c) {
+            function g(a, d) {
+              var b = d.split(".");
+              2 == b.length && ((a = a[b[0]]), (d = b[1]));
+              a[d] = function () {
+                a.push([d].concat(Array.prototype.slice.call(arguments, 0)));
+              };
+            }
+            var a = b;
+            "undefined" !== typeof c ? (a = b[c] = []) : (c = "mixpanel");
+            a.people = a.people || [];
+            a.toString = function (a) {
+              var d = "mixpanel";
+              "mixpanel" !== c && (d += "." + c);
+              a || (d += " (stub)");
+              return d;
+            };
+            a.people.toString = function () {
+              return a.toString(1) + ".people (stub)";
+            };
+            i =
+              "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(
+                " "
+              );
+            for (h = 0; h < i.length; h++) g(a, i[h]);
+            var j = "set set_once union unset remove delete".split(" ");
+            a.get_group = function () {
+              function b(c) {
+                d[c] = function () {
+                  call2_args = arguments;
+                  call2 = [c].concat(Array.prototype.slice.call(call2_args, 0));
+                  a.push([e, call2]);
+                };
+              }
+              for (
+                var d = {},
+                  e = ["get_group"].concat(
+                    Array.prototype.slice.call(arguments, 0)
+                  ),
+                  c = 0;
+                c < j.length;
+                c++
+              )
+                b(j[c]);
+              return d;
+            };
+            b._i.push([e, f, c]);
+          };
+          b.__SV = 1.2;
+          e = f.createElement("script");
+          e.type = "text/javascript";
+          e.async = !0;
+          e.src =
+            "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL
+              ? MIXPANEL_CUSTOM_LIB_URL
+              : "file:" === f.location.protocol &&
+                "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)
+              ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"
+              : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";
+          g = f.getElementsByTagName("script")[0];
+          g.parentNode.insertBefore(e, g);
+        }
+      })(document, window.mixpanel || []);
+    </script>
+  </head>
+
+  <body>
+    <script>
+      //Set The Domain for access Cross Origin Iframe
+      try {
+        // console.log(' ?????????????????? Check with Domain Change Started ')
+        window.document.domain = "sunstone.in";
+        // console.log(' ?????????????????? Check with Domain Change END ')
+      } catch (error) {
+        console.log(" ?????????????????? Check with error", error);
+      }
+    </script>
+    <iframe
+      allow="camera *; microphone *; autoplay *; encrypted-media *;  display-capture *;"
+      width="100%"
+      height="100%"
+      style="border: none; border-radius: 24px 24px 0 0"
+      allowtransparency="true"
+      ,
+      id="videoask-iframe"
+    ></iframe>
+
+    <script>
+      try {
+        const url = decodeURIComponent(
+          decodeURIComponent(window.location.href)
+        );
+        
+        const params = extractParamsFromUrl(url);
+        var isDev = params["env"]=="dev";
+        const userId = params["user_id"];
+        var headers = JSON.parse(params["header"]);
+        var currentQuestion = parseInt(params["question_number"]);
+
+        var seriesId = [
+          "fogamk3wh",
+          "fc9n03201",
+          "fvslktrmh",
+          "ftivxaab3",
+          "f0ikizxg5",
+        ];
+
+        function getSeriesId() {
+          return seriesId[currentQuestion - 1];
+        }
+
+        const interviewUrl = `https://www.videoask.com/${getSeriesId()}?contact_name=${
+          params.name
+        }&contact_email=${params.email}`;
+
+        document.getElementById("videoask-iframe").src = interviewUrl;
+        console.log("Interview Url", interviewUrl);
+        //mixpanel event tracking
+        mixpanel.init(getToken(url), {
+          debug: false,
+          track_pageview: true,
+          persistence: "localStorage",
+        });
+        // Set this to a unique identifier for the user performing the event.
+        mixpanel.identify(userId);
+        console.log("mixpanel registered");
+ 
+        //returns mixpanel token
+        function getToken() {
+          if (isDev) {
+            console.log("environment is dev");
+            return "9527755e2159573f7b942535c2ba6c84";
+          }
+          console.log("environment is prod");
+          return "297365d2e05ad94306700dc04ef62ddf";
+        }
+
+        function extractParamsFromUrl(url) {
+          let params = {};
+
+          // Get the query string part of the URL
+          let queryString = url.split("?")[1];
+
+          if (queryString) {
+            // Split the query string into key-value pairs
+            let pairs = queryString.split("&");
+
+            pairs.forEach((pair) => {
+              // Split each key-value pair
+              let [key, value] = pair.split("=");
+              // Decode key and value (in case of encoded characters)
+              key = decodeURIComponent(key);
+              value = decodeURIComponent(value);
+              // If the parameter already exists, update its value
+              // Otherwise, add it to the params object
+              params[key] = value;
+            });
+          }
+
+          return params;
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    </script>
+
+    <script>
+      //sending mixpanel event
+      function sendEvent(event, data, apiError = null) {
+        try {
+          let params = {
+            question_id: data.questionId,
+            api_time: Date().toLocaleString(),
+            error: apiError,
+          };
+          mixpanel.track(event, params);
+          console.log("mixpanel event sent");
+        } catch (e) {
+          console.log("failed sending event");
+          console.log(e);
+        }
+      }
+
+      let completed = false;
+
+      const isVideoaskMessage = (message) =>
+        message.origin === "https://www.videoask.com" &&
+        message.data &&
+        message.data.type &&
+        message.data.type.startsWith("videoask_");
+
+      window.addEventListener("message", async (message) => {
+        if (!isVideoaskMessage(message)) {
+          return;
+        }
+
+        try {
+          console.log(
+            "got videoask message DartCallBack",
+            JSON.stringify(message.data),
+            message.data.type
+          );
+          ///Call Bridge Method Fro Flutter WEB
+          ///Here using opener Instead parent As On Web This Script is Opened as new Window
+
+          if (message.data["type"] == "videoask_question_submitted") {
+            console.log(`question submitted ${currentQuestion} `);
+            sendEvent(
+              "question_complete_api_call_started_video_ask_script",
+              message.data
+            );
+
+            try {
+              await markQuestionCompleted();
+            } catch (e) {
+              sendEvent(
+                "question_complete_error_video_ask_script",
+                message.data,
+                e
+              );
+              //incase of first failure will retry once again.....
+              console.log("Error in API hit");
+              console.log(e);
+              console.log("retrying....");
+              await markQuestionCompleted();
+            }
+
+            if (currentQuestion < seriesId.length) {
+              currentQuestion++;
+              updateUrlParameter("question_number", currentQuestion);
+              console.log(`question increamented ${currentQuestion} `);
+            } else {
+              completed = true;
+            }
+            sendEvent("question_completed_video_ask_script", message.data);
+          }
+
+          if (completed) {
+            try {
+              ///Call Bridge Method From Flutter WEB only
+              window?.opener?.postMessage(
+                {
+                  type: "onVideoAskMessage",
+                  data: JSON.stringify({ status: "completed" }),
+                },
+                "*"
+              );
+              ///Call Bridge Method From Flutter Android/IOS
+              window.SUNSTONE_WEBVIEW.onVideoAskMessage({
+                type: "onVideoAskMessage",
+                data: JSON.stringify({ status: "completed" }),
+              });
+            } catch (e) {}
+
+            console.log("Closing script");
+            //closing the script
+            try {
+              window.opener.close();
+            } catch (error) {
+              console.log("Error in Closing  window.opener.close", error);
+            }
+            try {
+              window.parent.close();
+            } catch (error) {
+              console.log("Error in Closing window.parent.close", error);
+            }
+            try {
+              window.close();
+            } catch (error) {
+              console.log("Error in Closing window.close", error);
+            }
+          }
+        } catch (error) {
+          console.log("got videoask message Error", error);
+        }
+      });
+
+      function updateUrlParameter(key, value) {
+        // Get current URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        // Set or update the parameter
+        urlParams.set(key, value);
+        // Update the URL with the new parameters
+        const newUrl = `${window.location.pathname}?${urlParams}${window.location.hash}`;
+        // Replace the current URL in the browser's history without reloading the page
+        window.history.replaceState({}, "", newUrl);
+      }
+
+      //calls the api to update interview question status
+      async function markQuestionCompleted() {
+        const url = isDev
+          ? "https://dev-api.sunstone.in/hub/v2/lead/task"
+          : "https://api.sunstone.in/hub/v2/lead/task";
+        const pathParams = {
+          taskName: "lj_complete_interview_question",
+          taskData: {
+            numberOfQuestionsCompleted: currentQuestion,
+          },
+        };
+        const response = await fetch(url, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(pathParams),
+        });
+        if (!response.ok) {
+          throw Error("request failed!");
+        }
+        console.log(response);
+        const data = await response.json();
+        console.log("Response:", data);
+        // Do something with the response data
+      }
+    </script>
+  </body>
+</html>
